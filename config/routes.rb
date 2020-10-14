@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :restaurants do
+    # Everthing inside starts with /restaurants
+    collection do
+    # Verb + path
+      get :top
+      # get 'top', to: 'restaurants#top', as: :top_restaurants
+    end
+
+    member do
+      # Verb + path
+      get :chef
+      # get ':id/chef', to: 'restaurants#chef', as: :chef_restaurants
+    end
+
+    resources :reviews, only: [:new, :create]
+  end
+  resources :reviews, only: [:destroy]
 end
